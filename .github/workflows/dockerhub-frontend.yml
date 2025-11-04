@@ -29,8 +29,8 @@ jobs:
       - name: Build and Push Frontend Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: ${{ github.workspace }}/AS232S5_AEJ_10-fe
-          file: ${{ github.workspace }}/AS232S5_AEJ_10-fe/Dockerfile
+          context: ${{ github.workspace }}
+          file: ${{ github.workspace }}/Dockerfile
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/mis-apis-frontend:latest
