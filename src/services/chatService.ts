@@ -7,9 +7,9 @@ import type {
   HistoryItem
 } from '../types/api';
 
-const API_BASE_URL = 'http://localhost:8081/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8081/api';
 
-// Helper function to parse dates that can be either ISO strings or Java LocalDateTime arrays
+// Helper function to parse dates that can be either ISO strings or Java LocalDateTime arrays, hola
 const parseDate = (dateValue: string | number[] | undefined): Date | null => {
   if (!dateValue) return null;
   
