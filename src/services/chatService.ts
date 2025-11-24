@@ -7,7 +7,20 @@ import type {
   HistoryItem
 } from '../types/api';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8081/api';
+// Obtener la URL de la API desde la configuración dinámica o variable de entorno
+const getApiBaseUrl = () => {
+  // Intentar obtener desde window.ENV (configuración dinámica)
+  if (typeof window !== 'undefined' && (window as any).ENV?.VITE_API_BASE_URL) {
+    const dynamicUrl = (window as any).ENV.VITE_API_BASE_URL;
+    if (dynamicUrl !== '__API_BASE_URL_PLACEHOLDER__') {
+      return dynamicUrl;
+    }
+  }
+  // Fallback a variable de entorno de build time o localhost
+  return import.meta.env.VITE_API_BASE_URL || 'http://localhost:8081/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 // Helper function to parse dates that can be either ISO strings or Java LocalDateTime arrays, hola
 const parseDate = (dateValue: string | number[] | undefined): Date | null => {
